@@ -1,23 +1,205 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Page Title</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-  </head>
-  <body>
-    <div style="text-align:center">
-      <h1>this is a sample POC</h1>
-      <div>
-        <script src="//servedby.studads.com/ads/ads.php?t=MTE0NTE7Njc5MjtzcXVhcmUuc3F1YXJlX2JveA==&index=1"></script>
-      </div>
-    </div>
-    <div style="text-align:center">
-      <h1>this is a sample POC2</h1>
-      <div>
-        <script src="//servedby.studads.com/ads/ads.php?t=MTE0NTE7Njc5NDtob3Jpem9udGFsLmxlYWRlcmJvYXJk&index=1"></script>
-      </div>
-    </div>
-  </body>
+
+    <head>
+        <link rel="icon" type="image/png" href="/favicon.png">
+        <script async src="//www.googletagservices.com/tag/js/gpt.js"></script>
+        <script async src="//acdn.adnxs.com/prebid/not-for-prod/1/prebid.js"></script>
+        <meta charset="utf-8">
+        <style>
+            body {
+                color: #555;
+                font-family: sans-serif;
+            }
+        </style>
+
+        <script>
+            var googletag = googletag || {};
+            googletag.cmd = googletag.cmd || [];
+
+            var pbjs = pbjs || {};
+            pbjs.que = pbjs.que || [];
+            var PREBID_TIMEOUT = 3000;
+
+            var date = new Date().getTime();
+
+            function initAdserver() {
+                if (pbjs.initAdserverSet) return;
+
+                googletag.cmd.push(function() {
+                    pbjs.que.push(function() {
+                        pbjs.setTargetingForGPTAsync();
+                        googletag.pubads().refresh();
+                    });
+                });
+
+                pbjs.initAdserverSet = true;
+            }
+
+            setTimeout(initAdserver, PREBID_TIMEOUT);
+
+            pbjs.que.push(function() {
+                var adUnits = [{
+                        code: 'div-banner-native',
+                        mediaTypes: {
+                            banner: {
+                                sizes: [
+                                    [300, 250]
+                                ]
+                            },
+                            native: {
+                                type: 'image'
+                            },
+                        },
+                        bids: [{
+                            bidder: 'appnexus',
+                            params: {
+                                placementId: 13232392,
+                            }
+                        }]
+                    },
+                    {
+                        code: 'div-banner-outstream',
+                        mediaTypes: {
+                            banner: {
+                                sizes: [
+                                    [300, 250]
+                                ]
+                            },
+                            video: {
+                                context: 'outstream',
+                                playerSize: [300, 250]
+                            },
+                        },
+                        bids: [{
+                            bidder: 'appnexus',
+                            params: {
+                                placementId: 13232392,
+                            }
+                        }, ]
+                    },
+                    {
+                        code: 'div-banner-outstream-native',
+                        mediaTypes: {
+                            banner: {
+                                sizes: [
+                                    [300, 250]
+                                ]
+                            },
+                            native: {
+                                type: 'image'
+                            },
+                            video: {
+                                context: 'outstream',
+                                playerSize: [300, 250]
+                            },
+                        },
+                        bids: [{
+                            bidder: 'appnexus',
+                            params: {
+                                placementId: 13232392,
+                            }
+                        }, ]
+                    }
+                ];
+
+                pbjs.setConfig({
+                    debug: true,
+                    cache: {
+                        url: false
+                    },
+                });
+
+                pbjs.addAdUnits(adUnits);
+                pbjs.requestBids({
+                    bidsBackHandler: function(bidResponses) {
+                        initAdserver();
+                    }
+                });
+            });
+
+        </script>
+
+        <script>
+            googletag.cmd.push(function() {
+                googletag
+                    .defineSlot(
+                        '/19968336/prebid_multiformat_test', [
+                            [640, 480],
+                            [300, 250],
+                            [360, 360]
+                        ],
+                        'div-banner-native'
+                    )
+                    .addService(googletag.pubads());
+
+                googletag
+                    .defineSlot(
+                        '/19968336/prebid_multiformat_test', [
+                            [640, 480],
+                            [300, 250],
+                            [360, 360]
+                        ],
+                        'div-banner-outstream'
+                    )
+                    .addService(googletag.pubads());
+
+                googletag
+                    .defineSlot(
+                        '/19968336/prebid_multiformat_test', [
+                            [1, 1],
+                            [300, 250],
+                            [360, 360]
+                        ],
+                        'div-banner-outstream-native'
+                    )
+                    .addService(googletag.pubads());
+
+                googletag.pubads().disableInitialLoad();
+                googletag.pubads().enableSingleRequest();
+                googletag.enableServices();
+            });
+
+        </script>
+    </head>
+
+    <body>
+        <h2>Prebid Multi-Format Testing</h2>
+
+        <h3>div-banner-native</h3>
+        <div id='div-banner-native'>
+            <p>No response</p>
+            <script type='text/javascript'>
+                googletag.cmd.push(function() {
+                    googletag.display('div-banner-native');
+                });
+
+            </script>
+        </div>
+
+        <h3>div-banner-outstream</h3>
+        <div id='div-banner-outstream'>
+            <p>No response</p>
+            <script type='text/javascript'>
+                googletag.cmd.push(function() {
+                    googletag.display('div-banner-outstream');
+                });
+
+            </script>
+        </div>
+        <div></div>
+
+        <h3>div-banner-outstream-native</h3>
+        <div id='div-banner-outstream-native'>
+            <p>No response</p>
+            <script type='text/javascript'>
+                googletag.cmd.push(function() {
+                    googletag.display('div-banner-outstream-native');
+                });
+
+            </script>
+        </div>
+        <div></div>
+    </body>
+
 </html>
